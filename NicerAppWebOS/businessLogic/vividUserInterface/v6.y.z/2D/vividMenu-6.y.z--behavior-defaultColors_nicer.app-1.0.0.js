@@ -756,7 +756,11 @@ class naVividMenu__behavior_defaultColors {
             if (!t.panelsShown[panel.id]) t.panelsShown[panel.id] = {};
             if (t.panelsShown[panel.id].hideAll) clearTimeout (t.panelsShown[panel.id].hideAll);
         });
-
+        $(panel).bind('mouseover', function (event) {
+            t.cancelHidings(t);
+            if (!t.timeout_hideAll[t.el.id])
+                t.timeout_hideAll[t.el.id] = [];
+        });
         $('.vividMenu_item', panel).css({display:'inline-block', float:'left'});
         var
         itsKids = t.children[pit.idx],
@@ -964,6 +968,7 @@ class naVividMenu__behavior_defaultColors {
             $(bp).bind('mouseover', function (event) {
                 var bp = event.currentTarget;
 
+                debugger;
                 t.cancelHidings(t);
                 if (!t.timeout_hideAll[t.el.id])
                     t.timeout_hideAll[t.el.id] = [];
